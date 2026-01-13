@@ -32,7 +32,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Laravel\\Telescope\\TelescopeServiceProvider"
+                "Laravel\\Sentinel\\SentinelServiceProvider"
             ]
         }
     },
