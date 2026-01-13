@@ -5,12 +5,19 @@
     "authors": [
         {
             "name": "Mior Muhammad Zaki",
-            "email": "crynobone@gmail.com"
+            "email": "mior@laravel.com"
         }
     ],
     "autoload": {
         "psr-4": {
             "Laravel\\Sentinel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\": "workbench/app/",
+            "Database\\Factories\\": "workbench/database/factories/",
+            "Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "require": {
@@ -24,13 +31,6 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "autoload-dev": {
-        "psr-4": {
-            "App\\": "workbench/app/",
-            "Database\\Factories\\": "workbench/database/factories/",
-            "Database\\Seeders\\": "workbench/database/seeders/"
-        }
-    },
     "scripts": {
         "post-autoload-dump": [
             "@clear",
