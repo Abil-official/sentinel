@@ -18,9 +18,15 @@ abstract class Driver
         //
     }
 
-    public function attempt(Request $request): bool
+    /**
+     * Authorize access from local environment.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    public function authorize(Request $request): bool
     {
-        if ($app->isLocal() && ! IpUtils::isPrivateIp($request->ip()) && $request->isFromTrustedProxies()) {
+        if ($this->app->isLocal() && ! IpUtils::isPrivateIp($request->ip()) && $request->isFromTrustedProxy()) {
             return false;
         }
 
