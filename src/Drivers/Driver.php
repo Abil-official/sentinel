@@ -34,9 +34,12 @@ abstract class Driver
             return true;
         }
 
+        $isPrivateIp = IpUtils::isPrivateIp($request->ip());
+        $isFromTrustedProxy = $request->isFromTrustedProxy();
+
         if (
-            IpUtils::isPrivateIp($request->ip())
-            && ! $request->isFromTrustedProxy()
+            $isPrivateIp
+            && ! $isFromTrustedProxy
             && Str::endsWith($request->host(), ['.sharedwithexpose.com', '.ngrok-free.app'])
         ) {
             throw new RuntimeException(
@@ -44,7 +47,7 @@ abstract class Driver
             );
         }
 
-        if (! IpUtils::isPrivateIp($request->ip()) && $request->isFromTrustedProxy()) {
+        if (! $isPrivateIp && $isFromTrustedProxy) {
             return false;
         }
 
