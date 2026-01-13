@@ -1,6 +1,7 @@
 laravel: '@testbench'
 
 providers:
+  - App\Providers\WorkbenchServiceProvider
   - Laravel\Sentinel\SentinelServiceProvider
 
 migrations:
