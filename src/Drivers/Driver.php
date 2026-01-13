@@ -13,7 +13,7 @@ abstract class Driver
     /**
      * Construct a new driver.
      *
-     * @param \Illuminate\Contracts\Foundation\Application&\Illuminate\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Foundation\Application&\Illuminate\Foundation\Application  $app
      */
     public function __construct(protected Application $app)
     {
@@ -21,12 +21,14 @@ abstract class Driver
     }
 
     /**
-     * Authorize access from local environment.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return bool
+     * Authorize access the request.
      */
-    public function authorize(Request $request): bool
+    abstract public function authorize(Request $request): bool;
+
+    /**
+     * Authorize access from local environment.
+     */
+    protected function authorizeLocalEnvironmentAccessedFromReverseProxies(Request $request): bool
     {
         if (! $this->app->isLocal()) {
             return true;

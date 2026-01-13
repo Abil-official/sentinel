@@ -18,7 +18,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "^10.9",
-        "spatie/laravel-ray": "^1.43"
+        "spatie/laravel-ray": "^1.43",
+        "laravel/pint": "^1.27"
     },
     "license": "MIT",
     "minimum-stability": "dev",

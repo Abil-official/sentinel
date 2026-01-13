@@ -8,6 +8,9 @@ use Laravel\Sentinel\Http\Middleware\SentinelMiddleware;
 
 class SentinelServiceProvider extends ServiceProvider
 {
+    /**
+     * Register any application services.
+     */
     public function register(): void
     {
         $this->app->singleton(SentinelManager::class, fn ($app) => new SentinelManager($app));
