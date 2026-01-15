@@ -40,7 +40,7 @@ abstract class Driver
         if (
             $isPrivateIp
             && ! $isFromTrustedProxy
-            && Str::endsWith($request->host(), ['.sharedwithexpose.com', '.ngrok-free.app'])
+            && Str::endsWith($request->host(), ['.sharedwithexpose.com', '.ngrok-free.app', '.ngrok.io'])
         ) {
             throw new RuntimeException(
                 sprintf('Unable to access "%s /%s" using "local" environment, please change the environment or configure Trusted Proxies: https://laravel.com/docs/requests#configuring-trusted-proxies', $request->method(), $request->path())
