@@ -18,8 +18,8 @@ class Laravel extends Driver
         }
 
         if (
-            $isPrivateIp
-            && ! $isFromTrustedProxy
+            $this->isPrivateIp($request->ip())
+            && ! $request->isFromTrustedProxy()
             && Str::endsWith($request->host(), ['.sharedwithexpose.com', '.ngrok-free.app', '.ngrok.io'])
         ) {
             throw new RuntimeException(
