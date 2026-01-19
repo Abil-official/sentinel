@@ -9,7 +9,9 @@ use RuntimeException;
 class Laravel extends Driver
 {
     /**
-     * Authorize access the request.
+     * Authorize access for the request.
+     *
+     * @throws \RuntimeException
      */
     public function authorize(Request $request): bool
     {

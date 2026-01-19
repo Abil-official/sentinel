@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Drivers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Laravel\Sentinel\Drivers\Driver;
 use Laravel\Sentinel\SentinelManager;
@@ -65,5 +66,21 @@ class DriverTest extends TestCase
         tap($this->app->make(SentinelManager::class)->driver('testing'), function ($driver) use ($request) {
             $this->assertFalse($driver->authorize($request));
         });
+    }
+
+    public function test_it_can_authorize_or_fail_reverse_proxy_request_when_forwarding_for_public_ips()
+    {
+        $this->expectException(AuthorizationException::class);
+        $this->expectExceptionMessage('This action is unauthorized.');
+
+        $request = Request::create('/', 'GET', [], [], [], $this->transformHeadersToServerVars([
+            'REMOTE_ADDR' => '127.0.0.1',
+            'HOST' => 'laravel.ngrok.io',
+            'X-FORWARDED-FOR' => '202.168.65.217',
+            'X-FORWARDED-HOST' => 'laravel.ngrok.io',
+            'X-FORWARDED-PROTO' => 'https',
+        ]));
+
+        $this->app->make(SentinelManager::class)->driver('testing')->authorizeOrFail($request);
     }
 }

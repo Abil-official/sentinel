@@ -2,6 +2,7 @@
 
 namespace Laravel\Sentinel\Drivers;
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\IpUtils;
@@ -17,9 +18,21 @@ abstract class Driver
     }
 
     /**
-     * Authorize access the request.
+     * Authorize access for the request.
      */
     abstract public function authorize(Request $request): bool;
+
+    /**
+     * Authorize access for the request or throw an exception.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function authorizeOrFail(Request $request): void
+    {
+        if ($this->authorize($request) === false) {
+            throw new AuthorizationException;
+        }
+    }
 
     /**
      * Authorize access from local environment.
