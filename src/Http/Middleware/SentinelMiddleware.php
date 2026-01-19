@@ -4,7 +4,7 @@ namespace Laravel\Sentinel\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Laravel\Sentinel\SentinelManager;
+use Laravel\Sentinel\Sentinel;
 
 class SentinelMiddleware
 {
@@ -16,7 +16,7 @@ class SentinelMiddleware
      */
     public function handle(Request $request, Closure $next, ?string $driver = null)
     {
-        $sentinel = app(SentinelManager::class)->driverOrFallback($driver);
+        $sentinel = Sentinel::driverOrFallback($driver);
 
         abort_unless($sentinel->authorize($request), 401);
 

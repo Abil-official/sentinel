@@ -5,6 +5,7 @@ namespace Tests\Feature\Drivers;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Laravel\Sentinel\Drivers\Driver;
+use Laravel\Sentinel\Sentinel;
 use Laravel\Sentinel\SentinelManager;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Tests\TestCase;
@@ -33,7 +34,7 @@ class DriverTest extends TestCase
             'REMOTE_ADDR' => '127.0.0.1',
         ]);
 
-        tap($this->app->make(SentinelManager::class)->driver('testing'), function ($driver) use ($request) {
+        tap(Sentinel::driver('testing'), function ($driver) use ($request) {
             $this->assertTrue($driver->authorize($request));
         });
     }
@@ -48,7 +49,7 @@ class DriverTest extends TestCase
             'X-FORWARDED-PROTO' => 'https',
         ]);
 
-        tap($this->app->make(SentinelManager::class)->driver('testing'), function ($driver) use ($request) {
+        tap(Sentinel::driver('testing'), function ($driver) use ($request) {
             $this->assertTrue($driver->authorize($request));
         });
     }
@@ -63,7 +64,7 @@ class DriverTest extends TestCase
             'X-FORWARDED-PROTO' => 'https',
         ]));
 
-        tap($this->app->make(SentinelManager::class)->driver('testing'), function ($driver) use ($request) {
+        tap(Sentinel::driver('testing'), function ($driver) use ($request) {
             $this->assertFalse($driver->authorize($request));
         });
     }
@@ -81,6 +82,6 @@ class DriverTest extends TestCase
             'X-FORWARDED-PROTO' => 'https',
         ]));
 
-        $this->app->make(SentinelManager::class)->driver('testing')->authorizeOrFail($request);
+        Sentinel::driver('testing')->authorizeOrFail($request);
     }
 }
