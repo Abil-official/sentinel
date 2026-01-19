@@ -36,7 +36,7 @@ class SentinelManager extends Manager
      *
      * @throws \InvalidArgumentException
      */
-    public function driverOrFallback(string $driver)
+    public function driverOrFallback(?string $driver)
     {
         return rescue(function () use ($driver) {
             return $this->driver($driver);

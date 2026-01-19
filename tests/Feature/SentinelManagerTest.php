@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests;
+namespace Tests\Feature;
 
 use Laravel\Sentinel\Drivers\Driver;
 use Laravel\Sentinel\Drivers\Laravel;
 use Laravel\Sentinel\SentinelManager;
+use Tests\TestCase;
 
 class SentinelManagerTest extends TestCase
 {
