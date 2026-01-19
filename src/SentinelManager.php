@@ -11,7 +11,7 @@ class SentinelManager extends Manager
      *
      * @return \Laravel\Sentinel\Drivers\Laravel
      */
-    public function createLaravelDriver()
+    protected function createLaravelDriver()
     {
         /** @var \Illuminate\Contracts\Container\Container&\Illuminate\Contracts\Foundation\Application $app */
         $app = $this->getContainer();
