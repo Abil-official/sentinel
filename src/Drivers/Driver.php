@@ -35,7 +35,7 @@ abstract class Driver
     }
 
     /**
-     * Authorize access from local environment.
+     * Authorize accessing via reverse proxies.
      */
     protected function authorizeAccessingViaReverseProxies(Request $request): bool
     {
