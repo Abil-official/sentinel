@@ -28,4 +28,20 @@ class SentinelManager extends Manager
     {
         return 'laravel';
     }
+
+    /**
+     * Get a driver instance or fallback to default
+     *
+     * @return mixed
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function driverOrFallback(string $driver)
+    {
+        return rescue(function () use ($driver) {
+            return $this->driver($driver);
+        }, value(function () {
+            return $this->driver();
+        }), false);
+    }
 }

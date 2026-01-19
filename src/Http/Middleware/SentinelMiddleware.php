@@ -12,11 +12,11 @@ class SentinelMiddleware
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @return mixed
      */
     public function handle(Request $request, Closure $next, ?string $driver = null)
     {
-        $manager = app(SentinelManager::class);
-        $sentinel = rescue(fn () => $manager->driver($driver), fn () => $manager->driver(), false);
+        $sentinel = app(SentinelManager::class)->driverOrFallback($driver);
 
         abort_unless($sentinel->authorize($request), 401);
 

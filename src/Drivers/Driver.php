@@ -12,8 +12,6 @@ abstract class Driver
 {
     /**
      * Construct a new driver.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application&\Illuminate\Foundation\Application  $app
      */
     public function __construct(protected Application $app)
     {
@@ -30,7 +28,7 @@ abstract class Driver
      */
     protected function authorizeLocalEnvironmentAccessedFromReverseProxies(Request $request): bool
     {
-        if (! $this->app->isLocal()) {
+        if (! $this->app->environment('local')) {
             return true;
         }
 

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Middleware\TrustProxies;
 use Illuminate\Support\ServiceProvider;
 
 class WorkbenchServiceProvider extends ServiceProvider
@@ -12,7 +11,7 @@ class WorkbenchServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        TrustProxies::at('*');
+        //
     }
 
     /**

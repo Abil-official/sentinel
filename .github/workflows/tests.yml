@@ -19,8 +19,26 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: [8.4]
-        laravel: [12]
+        php: [8.1, 8.2, 8.3, 8.4, 8.5]
+        laravel: [10, 11, 12]
+        include:
+          - php: 8.2
+            laravel: 9
+          - php: 8.1
+            laravel: 9
+          - php: '8.0'
+            laravel: 9
+        exclude:
+          - php: 8.4
+            laravel: 10
+          - php: 8.5
+            laravel: 10
+          - php: 8.5
+            laravel: 11
+          - php: 8.1
+            laravel: 11
+          - php: 8.1
+            laravel: 12
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
@@ -36,6 +54,11 @@ jobs:
           ini-values: error_reporting=E_ALL
           tools: composer:v2
           coverage: none
+
+      - name: Remove static analysis & code standard dependencies
+        run: |
+           composer remove --dev "laravel/pint" --no-update --no-progress
+           composer remove --dev "phpstan/phptan" --no-update --no-progress
 
       - name: Install dependencies
         run: |
