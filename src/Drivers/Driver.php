@@ -26,7 +26,7 @@ abstract class Driver
     /**
      * Authorize access from local environment.
      */
-    protected function authorizeLocalEnvironmentAccessedFromReverseProxies(Request $request): bool
+    protected function authorizeAccessingViaReverseProxiesOnLocalEnvironment(Request $request): bool
     {
         if (! $this->app->environment('local')) {
             return true;

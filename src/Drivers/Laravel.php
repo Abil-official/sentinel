@@ -11,6 +11,6 @@ class Laravel extends Driver
      */
     public function authorize(Request $request): bool
     {
-        return $this->authorizeLocalEnvironmentAccessedFromReverseProxies($request);
+        return $this->authorizeAccessingViaReverseProxiesOnLocalEnvironment($request);
     }
 }
