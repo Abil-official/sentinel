@@ -13,7 +13,7 @@ class SentinelMiddlewareTest extends TestCase
     protected function defineEnvironment($app): void
     {
         $app->make(SentinelManager::class)->extend('testing', function ($app) {
-            return new class($app) extends Driver
+            return new class(fn () => $app) extends Driver
             {
                 public function authorize(Request $request): bool
                 {

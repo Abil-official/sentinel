@@ -2,6 +2,7 @@
 
 namespace Laravel\Sentinel\Drivers;
 
+use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
@@ -11,8 +12,10 @@ abstract class Driver
 {
     /**
      * Construct a new driver.
+     *
+     * @param  \Closure(): \Illuminate\Contracts\Foundation\Application  $applicationResolver
      */
-    public function __construct(protected Application $app)
+    public function __construct(protected Closure $applicationResolver)
     {
         //
     }
@@ -70,5 +73,13 @@ abstract class Driver
             '::ffff:0:0/96',  // IPv4 translations
             '::/128',         // Unspecified address
         ]);
+    }
+
+    /**
+     * Get the application instance.
+     */
+    protected function app(): Application
+    {
+        return ($this->applicationResolver)();
     }
 }

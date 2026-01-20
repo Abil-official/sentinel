@@ -15,17 +15,15 @@ class Laravel extends Driver
      */
     public function authorize(Request $request): bool
     {
-        if (! $this->app->environment('local')) {
+        if (! $this->app()->environment('local')) {
             return true;
         }
 
-        if (
-            $this->isPrivateIp($request->ip())
+        if ($this->isPrivateIp($request->ip())
             && ! $request->isFromTrustedProxy()
-            && Str::endsWith($request->host(), ['.sharedwithexpose.com', '.ngrok-free.app', '.ngrok.io'])
-        ) {
+            && Str::endsWith($request->host(), ['.sharedwithexpose.com', '.ngrok-free.app', '.ngrok.io'])) {
             throw new RuntimeException(
-                sprintf('Unable to access "%s /%s" using "local" environment, please change the environment or configure Trusted Proxies: https://laravel.com/docs/requests#configuring-trusted-proxies', $request->method(), $request->path())
+                sprintf('Unable to access "%s /%s" using "local" environment, please change the environment or configure trusted proxies: https://laravel.com/docs/requests#configuring-trusted-proxies', $request->method(), $request->path())
             );
         }
 

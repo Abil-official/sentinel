@@ -16,9 +16,7 @@ class SentinelMiddleware
      */
     public function handle(Request $request, Closure $next, ?string $driver = null)
     {
-        $sentinel = Sentinel::driverOrFallback($driver);
-
-        abort_unless($sentinel->authorize($request), 401);
+        abort_unless(Sentinel::driverOrFallback($driver)->authorize($request), 401);
 
         return $next($request);
     }

@@ -11,6 +11,6 @@ class SentinelServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(SentinelManager::class, fn ($app) => new SentinelManager($app));
+        $this->app->scoped(SentinelManager::class, fn ($app) => new SentinelManager($app));
     }
 }
