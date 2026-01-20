@@ -2,7 +2,6 @@
 
 namespace Laravel\Sentinel;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
 class SentinelServiceProvider extends ServiceProvider
