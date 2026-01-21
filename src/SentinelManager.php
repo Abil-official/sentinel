@@ -13,6 +13,7 @@ class SentinelManager extends Manager
      */
     protected function createLaravelDriver()
     {
+        /** @phpstan-ignore argument.type */
         return new Drivers\Laravel(fn () => $this->getContainer());
     }
 
