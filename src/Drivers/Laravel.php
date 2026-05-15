@@ -27,7 +27,9 @@ class Laravel extends Driver
             );
         }
 
-        if ($this->isRunningOnDockerLocally($request)) {
+        if ($this->isRunningOnDockerLocally($request)
+            || $this->isRunningOnValetLocally($request)
+            || $this->isRunningOnHerdLocally($request)) {
             return true;
         }
 
