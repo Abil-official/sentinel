@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/laravel/sentinel/compare/v1.1.0...1.x)
 
-* Authorize local connections from Laravel Valet and Herd by [@Abil-official](https://github.com/Abil-official)
+* Authorize local connections from Laravel Valet and Herd by [@Abil-official](https://github.com/Abil-official) in https://github.com/Abil-official/sentinel/pull/1
 
 ## [v1.1.0](https://github.com/laravel/sentinel/compare/v1.0.1...v1.1.0) - 2026-03-24
 
